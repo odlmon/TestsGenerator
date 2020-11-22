@@ -9,7 +9,7 @@ namespace TestsGenerator
 {
     public class TestsGenerator
     {
-        public async Task<List<TestClass>> GenerateAsync(string sourceCode)
+        public List<TestClass> Generate(string sourceCode)
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
             var classes = syntaxTree
@@ -58,6 +58,11 @@ namespace TestsGenerator
             }
 
             return testClasses;
+        }
+        
+        public async Task<List<TestClass>> GenerateAsync(string sourceCode)
+        {
+            return await Task.Run(() => Generate(sourceCode));
         }
     }
 }
