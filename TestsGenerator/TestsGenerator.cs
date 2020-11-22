@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -8,7 +9,7 @@ namespace TestsGenerator
 {
     public class TestsGenerator
     {
-        public List<TestClass> Generate(string sourceCode)
+        public async Task<List<TestClass>> GenerateAsync(string sourceCode)
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
             var classes = syntaxTree

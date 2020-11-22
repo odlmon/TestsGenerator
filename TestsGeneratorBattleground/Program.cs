@@ -32,10 +32,10 @@ namespace TestsGeneratorBattleground
                 }
             }, new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = MaxDegreeOfParallelismRead});
 
-            var generateTests = new TransformManyBlock<string, TestClass>(sourceCode => 
+            var generateTests = new TransformManyBlock<string, TestClass>(async sourceCode => 
             {
                 Console.WriteLine("Generating test classes...");
-                return generator.Generate(sourceCode);
+                return await generator.GenerateAsync(sourceCode);
             }, new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = MaxDegreeOfParallelismGenerate});
 
             var saveTestFile = new ActionBlock<TestClass>(async testClass => 
